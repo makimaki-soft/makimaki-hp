@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>まきまきソフト</title>
+        <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="/css/main-style.css">
+        <script src="//code.angularjs.org/1.6.1/angular.min.js"></script>
+        <link rel="icon" href="/img/favicon.ico">
+    </head>
+    <body ng-app>
+        <!-- header -->
+        <ng-include src="'/template/header.html'"></ng-include>
+        <!-- /header -->
+
+    <section class="main-content container">
+        <div class="photo col-xs-18 col-md-12">
+            <a href="https://mypkfauna.firebaseapp.com/"><img class="img-thumbnail" src="img/games/lineup_2.png"></a>
+        </div><!-- spaces-post-content -->
+        <div class="info col-xs-18 col-md-12">
+            <h4>お知らせ</h4>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="thumbnail">
+                        <img src="img/games/info/game_pkfauna.png">
+                        <div class="caption">
+                            <span>c91出展 ポケモンファウナ</span>
+                            <p>2016/12/29(木)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!-- main-content -->
+
+        <!-- footer -->
+        <ng-include src="'/template/footer.html'"></ng-include>
+        <!-- /footer -->
+
+    <script type="text/javascript" src="js/jquery-2.0.3.min.js"></script>
+    </body>
+</html>

@@ -1,0 +1,194 @@
+/*
+ * common
+ */
+body {
+    font-family: "メイリオ", sans-serif;
+}
+
+
+a {
+    color: #333;
+    font-weight: bold;
+}
+
+/* スマホだけ */
+@media (max-width: 767px) {
+    .container {
+        padding-right: 0px;
+        padding-left: 0px;
+    }
+
+    .photo {
+        padding-right: 0px;
+        padding-left: 0px;
+    }
+}
+
+
+/*
+ * header
+ */
+
+header {
+    display: block;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin-bottom: 100px;
+    height: 100%;
+    border-bottom: #d6d6d6 solid 1px;
+    border-top: #3c763d solid 3px;
+    background-color: #FFAF00;
+}
+
+header div.logo {
+    position: absolute;
+}
+
+header div.logo img{
+    max-height: 100px;
+}
+
+.menu .nav>li:before {
+    content: "|";
+    display: block;
+    position: absolute;
+    top:10px;
+    left: 0px;
+}
+
+.menu .nav>li:last-child:after {
+    content: "|";
+    display: block;
+    position: absolute;
+    top:10px;
+    right: 0px;
+}
+
+.menu .nav>li>a.off {
+    text-decoration: none;
+    color: #333;
+    background-color: #FFF;
+}
+
+.menu .nav>li>a.on {
+    text-decoration: none;
+    color: #3c763d;
+    background-color: #c1e2b3;
+}
+
+.menu .nav>li>a:hover {
+    text-decoration: none;
+    color: #3c763d;
+    background-color: #c1e2b3;
+}
+
+/* スマホだけ */
+@media (max-width: 767px) {
+    header {
+        padding-top: 3px;
+        padding-bottom: 1px;
+    }
+
+    .menu .nav {
+        display: none;
+        position: absolute;
+        top: 0px;
+        z-index: 10;
+    }
+
+    .menu-icon {
+        position: absolute;
+        top:10px;
+        right: 5px;
+        font-size: 30px;
+    }
+
+    .menu .nav>li>a.off {
+        text-decoration: none;
+        color: #333;
+        background-color: #eee;
+    }
+
+    .menu .nav>li>a.on {
+        text-decoration: none;
+        color: #3c763d;
+        background-color: #c1e2b3;
+    }
+
+    .menu .nav>li:before {
+        content: "";
+    }
+
+    .menu .nav>li:after {
+        content: ">";
+        display: block;
+        position: absolute;
+        top:10px;
+        right: 0px;
+    }
+
+    .menu .nav>li>a:hover {
+        text-decoration: none;
+        color: #3c763d;
+        background-color: #c1e2b3;
+    }
+}
+
+
+
+
+/*
+ * section
+ */
+section div {
+    padding-bottom: 5px;
+}
+
+.pankuzu ul{
+    list-style: none;
+    padding-left: 0px;
+}
+
+.pankuzu li:after {
+    content: ">";
+    display: block;
+    position: absolute;
+    top:0px;
+    right: 0px;
+}
+
+.pankuzu li:last-child:after {
+    content: "";
+}
+
+.pankuzu li a {
+    color: #775cad;
+    text-decoration: none;
+    font-weight: normal;
+}
+
+/* スマホだけ */
+@media (max-width: 767px) {
+    .pankuzu li:after {
+        content: ">";
+        display: block;
+        position: absolute;
+        top:0px;
+        right: 10px;
+    }
+}
+
+
+/*
+ * footer
+ */
+footer {
+    width: 100%;
+    background: #232323;
+    color: #FFF;
+}
+
+footer address {
+    padding-top: 20px;
+}
+
