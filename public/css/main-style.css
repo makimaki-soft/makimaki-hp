@@ -17,20 +17,6 @@ a:focus, a:hover {
     text-decoration: underline;
 }
 
-/* スマホだけ */
-@media (max-width: 767px) {
-    .container {
-        padding-right: 0px;
-        padding-left: 0px;
-    }
-
-    .photo {
-        padding-right: 0px;
-        padding-left: 0px;
-    }
-}
-
-
 /*
  * header
  */
@@ -54,10 +40,12 @@ header div.logo img {
 
 header div.logosp {
     position: absolute;
+    z-index: 100;
 }
 
 header div.logosp img {
     display: none;
+    padding: 3px;
 }
 
 header .nav>li>a:focus, .nav>li>a:hover {
@@ -65,7 +53,7 @@ header .nav>li>a:focus, .nav>li>a:hover {
     background-color: #fff;
 }
 
-.menu .nav>li:before {
+header .menu .nav>li:before {
     content: "|";
     display: block;
     position: absolute;
@@ -73,7 +61,7 @@ header .nav>li>a:focus, .nav>li>a:hover {
     left: 0px;
 }
 
-.menu .nav>li:last-child:after {
+header .menu .nav>li:last-child:after {
     content: "|";
     display: block;
     position: absolute;
@@ -81,93 +69,22 @@ header .nav>li>a:focus, .nav>li>a:hover {
     right: 0px;
 }
 
-.menu .nav>li>a.off {
+header .menu .nav>li>a.off {
     text-decoration: none;
     color: #333;
     background-color: #FFF;
 }
 
-.menu .nav>li>a.on {
+header .menu .nav>li>a.on {
     text-decoration: none;
     color: #3c763d;
     background-color: #c1e2b3;
 }
 
-.menu .nav>li>a:hover {
+header .menu .nav>li>a:hover {
     text-decoration: none;
     color: #3c763d;
     background-color: #c1e2b3;
-}
-
-/* スマホだけ */
-@media (max-width: 767px) {
-    header {
-        padding-top: 3px;
-        padding-bottom: 1px;
-    }
-
-    header div.logo img {
-        display: none;
-    }
-
-    header div.logosp img {
-        display: block;
-        max-height: 40px;
-        padding: 0px;
-        margin-left: 10px;
-        margin-top: 7px;
-    }
-
-    .menu .nav {
-        display: none;
-        position: absolute;
-        top: 0px;
-        z-index: 10;
-    }
-
-    .menu-icon {
-        position: absolute;
-        top:10px;
-        right: 5px;
-        font-size: 30px;
-    }
-
-    .menu .nav>li>a.off {
-        text-decoration: none;
-        color: #333;
-        background-color: #eee;
-    }
-
-    .menu .nav>li>a.on {
-        text-decoration: none;
-        color: #3c763d;
-        background-color: #c1e2b3;
-    }
-
-    .menu .nav>li:before {
-        content: "";
-    }
-
-    .menu .nav>li:after {
-        content: ">";
-        display: block;
-        position: absolute;
-        top:10px;
-        right: 0px;
-    }
-
-    .menu .nav>li>a:hover {
-        text-decoration: none;
-        color: #3c763d;
-        background-color: #c1e2b3;
-    }
-
-/* スマホだけ */
-@media (max-width: 767px) {
-    header {
-        padding-top: 3px;
-        padding-bottom: 1px;
-    }
 }
 
 /*
@@ -176,6 +93,7 @@ header .nav>li>a:focus, .nav>li>a:hover {
 section {
     margin-left: 100px;
     margin-right: 100px;
+    margin-bottom: 50px;
 }
 
 section div {
@@ -187,24 +105,6 @@ section h3 {
     border-bottom-color: #999;
 }
 
-/* スマホだけ */
-@media (max-width: 767px) {
-    .pankuzu li:after {
-        content: ">";
-        display: block;
-        position: absolute;
-        top:0px;
-        right: 10px;
-    }
-}
-
-/*
- *
- */
-section.index div.photo {
-    margin-top: 10px;
-}
-
 /*
  * footer
  */
@@ -214,9 +114,124 @@ footer {
     width: 100%;
     background: #232323;
     color: #FFF;
+    font-size: 9px;
 }
 
 footer address {
     padding-top: 20px;
 }
+
+/* スマホだけ */
+@media (max-width: 767px) {
+    .container {
+        padding-right: 0px;
+        padding-left: 0px;
+    }
+
+    header {
+        padding: 0px;
+        margin-bottom: 10px;
+        height: 55px;
+    }
+
+    header div.logo img {
+        display: none;
+    }
+
+    header div.logosp img {
+        display: block;
+        max-height: 40px;
+        padding: 0px;
+        margin: 8px;
+        border: 3px solid #fff;
+        float: left;
+    }
+
+    header div.logosp p {
+        width: 300px;
+        font-weight: bold;
+        font-size: 25px;
+        margin-top: 10px;
+        color: #fff;
+    }
+
+    header .menu .nav {
+        display: none;
+        top: 0px;
+        z-index: 10;
+        right: 20px;
+        height: 100%;
+    }
+
+    header div.menu-list {
+        padding-right: 0px;
+        padding-left: 0px;
+        margin-right: 35px;
+        z-index: 2;
+    }
+
+    header .menu-icon {
+        position: absolute;
+        top:10px;
+        right: 5px;
+        font-size: 30px;
+    }
+
+    header .nav {
+        background-color: #fff;
+    }
+
+    header .menu .nav>li>a.off {
+        text-decoration: underline;
+        color: #333;
+        background-color: #eee;
+    }
+
+    header .menu .nav>li>a.on {
+        text-decoration: underline;
+        color: #3c763d;
+        background-color: #c1e2b3;
+    }
+
+    header .menu .nav>li:before {
+        content: "";
+    }
+
+    header .menu .nav>li:after {
+        content: "";
+        display: block;
+        position: absolute;
+        top:10px;
+        right: 0px;
+    }
+
+    header .menu .nav>li:last-child:after {
+        content: "";
+        display: block;
+        position: absolute;
+        top:10px;
+        right: 0px;
+    }
+
+    header .menu .nav>li>a:hover {
+        text-decoration: none;
+        color: #3c763d;
+        background-color: #c1e2b3;
+    }
+
+    section {
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-bottom: 50px;
+    }
+
+    /*
+     * about
+     */
+    section ul.using li {
+        margin-left: 0px;
+    }
+}
+
+
 
