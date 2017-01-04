@@ -39,13 +39,9 @@ header div.logo img {
 }
 
 header div.logosp {
+    display: none;
     position: absolute;
     z-index: 100;
-}
-
-header div.logosp img {
-    display: none;
-    padding: 3px;
 }
 
 header .nav>li>a:focus, .nav>li>a:hover {
@@ -94,6 +90,7 @@ section {
     margin-left: 100px;
     margin-right: 100px;
     margin-bottom: 50px;
+    padding-top: 10px;
 }
 
 section div {
@@ -121,6 +118,17 @@ footer address {
     padding-top: 20px;
 }
 
+/*
+ * about
+ */
+
+/*
+ * games
+ */
+ section.games .media-object {
+    width: 256px;
+ }
+
 /* スマホだけ */
 @media (max-width: 767px) {
     .container {
@@ -134,12 +142,15 @@ footer address {
         height: 55px;
     }
 
-    header div.logo img {
+    header div.logo {
         display: none;
     }
 
-    header div.logosp img {
+    header div.logosp {
         display: block;
+    }
+
+    header div.logosp img {
         max-height: 40px;
         padding: 0px;
         margin: 8px;
@@ -231,6 +242,13 @@ footer address {
     section ul.using li {
         margin-left: 0px;
     }
+
+    /*
+     * games
+     */
+     section.games .media-object {
+        width: 96px;
+     }
 }
 
 
