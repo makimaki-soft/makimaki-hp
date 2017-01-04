@@ -13,7 +13,6 @@ a {
 }
 
 a:focus, a:hover {
-    color: #d20000;
     text-decoration: underline;
 }
 
@@ -42,11 +41,6 @@ header div.logosp {
     display: none;
     position: absolute;
     z-index: 100;
-}
-
-header .nav>li>a:focus, .nav>li>a:hover {
-    text-decoration: underline;
-    background-color: #fff;
 }
 
 header .menu .nav>li:before {
@@ -79,8 +73,6 @@ header .menu .nav>li>a.on {
 
 header .menu .nav>li>a:hover {
     text-decoration: none;
-    color: #3c763d;
-    background-color: #c1e2b3;
 }
 
 /*
