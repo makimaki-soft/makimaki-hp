@@ -113,13 +113,27 @@ footer address {
 /*
  * about
  */
+section.about div.chara {
+    float: right;
+    margin-right: 50px;
+}
+
+section.about div.chara img{
+    max-width: 200px;
+}
 
 /*
  * games
  */
- section.games .media-object {
+section.games .media-object {
     width: 256px;
- }
+}
+
+section.games .media-heading {
+    border-left: 5px solid #5a5a5a;
+    padding-left: 3px;
+    font-weight: bold;
+}
 
 /* スマホだけ */
 @media (max-width: 767px) {
@@ -231,7 +245,7 @@ footer address {
     /*
      * about
      */
-    section ul.using li {
+    section.about ul.using li {
         margin-left: 0px;
     }
 
