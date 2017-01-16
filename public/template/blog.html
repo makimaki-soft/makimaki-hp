@@ -1,0 +1,24 @@
+<section class="blog">
+    <div class="media" ng-repeat="article in articles | orderBy:'updatetime':true">
+      <div class="media-left">
+        <a ng-href="#/blog/article{{article.updatetime}}">
+          <img class="media-object thumbnail" ng-src="{{article.thumbnail}}">
+        </a>
+      </div>
+      <div class="media-body">
+        {{article.tags}}
+        <h4 class="media-heading"><a ng-href="#/blog/article{{article.updatetime}}">{{article.title}}</a></h4>
+        {{article.updatetime}}
+        <p>{{article.description}}</p>
+      </div>
+    </div>
+</section>
+
+<section class="blog-detail">
+    <div class="">
+      <p>{{article.tags}}</p>
+      <h2>{{article.title}}</h2>
+      <p>{{article.updatetime}}</p>
+      <p ng-bind-html="article.body"></p>
+    </div>
+</section>

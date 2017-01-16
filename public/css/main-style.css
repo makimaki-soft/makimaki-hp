@@ -135,6 +135,17 @@ section.games .media-heading {
     font-weight: bold;
 }
 
+/*
+ * blog
+ */
+section.blog {
+    display: none;
+}
+
+section.blog-detail {
+    display: none;
+}
+
 /* スマホだけ */
 @media (max-width: 767px) {
     .container {

@@ -7,6 +7,8 @@
         <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="/css/main-style.css">
         <script src="//code.angularjs.org/1.6.1/angular.min.js"></script>
+        <script src="//code.angularjs.org/1.6.1/angular-sanitize.js"></script>
+        <script src="//code.angularjs.org/1.6.1/angular-route.min.js"></script>
         <link rel="icon" href="/img/favicon.ico">
     </head>
     <body data-ng-app="hpApp">
@@ -28,29 +30,26 @@
         <ng-include src="'/template/header.html'"></ng-include>
         <!-- /header -->
 
-    <section class="index container">
-        <div class="photo col-xs-18 col-md-12">
-            <a href="https://mypkfauna.firebaseapp.com/"><img class="img-thumbnail" src="img/games/lineup_2.png"></a>
-        </div><!-- spaces-post-content -->
-        <div class="info col-xs-18 col-md-12">
-            <h3>お知らせ</h3>
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="thumbnail">
-                        <img src="img/games/info/game_pkfauna.png">
-                        <div class="caption">
-                        <span>c91出展 <a href="/games#pkfauna">ポケモンファウナ</a></span>
-                            <p>2016/12/29(木) 公開しました。</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section><!-- main-content -->
+        <!-- main contents -->
+        <div ng-view></div>
+        <!-- /main contents -->
 
         <!-- footer -->
         <ng-include src="'/template/footer.html'"></ng-include>
         <!-- /footer -->
+
+        <script src="https://www.gstatic.com/firebasejs/3.6.5/firebase.js"></script>
+        <script>
+          // Initialize Firebase
+          var config = {
+            apiKey: "AIzaSyCG4q8L-XZIpRNajZZOZF-HrKbT6Nvc4c0",
+            authDomain: "makimaki-hp.firebaseapp.com",
+            databaseURL: "https://makimaki-hp.firebaseio.com",
+            storageBucket: "makimaki-hp.appspot.com",
+            messagingSenderId: "527975758642"
+          };
+          firebase.initializeApp(config);
+        </script>
 
         <script type="text/javascript" src="/js/jquery-2.0.3.min.js"></script>
         <script type="text/javascript" src="/js/app.js"></script>
