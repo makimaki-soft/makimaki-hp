@@ -8,17 +8,17 @@
       <div class="media-body">
         {{article.tags}}
         <h4 class="media-heading"><a ng-href="#/blog/article{{article.updatetime}}">{{article.title}}</a></h4>
-        {{article.updatetime}}
+        {{article.updatetime | myDate }}
         <p>{{article.description}}</p>
       </div>
     </div>
 </section>
 
 <section class="blog-detail">
-    <div class="">
-      <p>{{article.tags}}</p>
-      <h2>{{article.title}}</h2>
-      <p>{{article.updatetime}}</p>
-      <p ng-bind-html="article.body"></p>
+    <div>
+        <p>{{article.tags}}</p>
+        <h2>{{article.title}}</h2>
+        <p>{{article.updatetime | myDate }}</p>
+        <div ng-bind-html="article.body"></div>
     </div>
 </section>

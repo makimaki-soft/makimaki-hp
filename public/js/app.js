@@ -28,6 +28,24 @@ var app = angular.module('hpApp',['ngSanitize', 'ngRoute'])
         $locationProvider.hashPrefix('');
     }]);
 
+
+// ---------------------------------------------------------
+// カスタムフィルター
+// ---------------------------------------------------------
+// YYYYMMDD文字列用
+app.filter('myDate', function() {
+    return function(input) {
+        if(!input) {
+            return;
+        }
+        console.log(input);
+        return input.substr(0, 4) + "年"
+             + input.substr(4, 2) + "月"
+             + input.substr(6, 2) + "日";
+    }
+});
+
+
 // ---------------------------------------------------------
 // 右上のメニューの表示
 // ---------------------------------------------------------
@@ -55,6 +73,7 @@ app.controller('blogController', ['$scope', '$routeParams', function($scope, $ro
 
             // view にセット
             document.querySelector("section.blog-detail").style.display = "block";
+            hljs.initHighlightingOnLoad();
             return;
         }
         firebase.database().ref('/blog/').limitToLast(10).once('value').then(function(snapshot) {
@@ -67,6 +86,7 @@ app.controller('blogController', ['$scope', '$routeParams', function($scope, $ro
 
             // view にセット
             document.querySelector("section.blog-detail").style.display = "block";
+            hljs.initHighlightingOnLoad();
         });
     }else { // ----- indexページ(パラメータ無し)
         if(articles == []) { // ----- 記事取得済ならデータとりにいかない。
