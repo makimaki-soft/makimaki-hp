@@ -1,10 +1,12 @@
 // ---------------------------------------------------------
 // 共通変数
 // ---------------------------------------------------------
-var articles = [];
+//var dbname = "/blog/"; // blogデータの参照先
+var dbname = "/test/"; // blogデータの参照先
+var articles = []; // blog記事
 
 
-var app = angular.module('hpApp',['ngSanitize', 'ngRoute'])
+var app = angular.module('hpApp',['ngSanitize', 'ngRoute', 'btford.markdown'])
     .config(['$routeProvider', function($routeProvider){
         $routeProvider
         .when('/', {
@@ -19,6 +21,9 @@ var app = angular.module('hpApp',['ngSanitize', 'ngRoute'])
         .when('/blog/:id?', {
             templateUrl: 'template/blog.html',
             controller: 'blogController'
+        })
+        .when('/tool/blog_cms/', {
+            templateUrl: 'template/blog_cms.html',
         })
         .otherwise({
             redirectTo: '/'
@@ -76,7 +81,7 @@ app.controller('blogController', ['$scope', '$routeParams', function($scope, $ro
             hljs.initHighlightingOnLoad();
             return;
         }
-        firebase.database().ref('/blog/').limitToLast(10).once('value').then(function(snapshot) {
+        firebase.database().ref(dbname).limitToLast(10).once('value').then(function(snapshot) {
             articles = snapshot.val();
             var article = articles[$scope.id];
             console.log(article);
@@ -102,7 +107,7 @@ app.controller('blogController', ['$scope', '$routeParams', function($scope, $ro
             document.querySelector("section.blog").style.display = "block";
             return;
         }
-        firebase.database().ref('/blog/').limitToLast(10).once('value').then(function(snapshot) {
+        firebase.database().ref(dbname).limitToLast(10).once('value').then(function(snapshot) {
             articles = snapshot.val();
             // 配列に変換
             ary_articles = $.map(articles, function(value, index) {

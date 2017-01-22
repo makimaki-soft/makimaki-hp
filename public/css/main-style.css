@@ -183,6 +183,12 @@ section.blog-detail p.pre {
     font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
 }
 
+
+/*
+ * tool blog
+ */
+
+
 /* スマホだけ */
 @media (max-width: 767px) {
     .container {
