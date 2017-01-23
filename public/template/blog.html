@@ -1,14 +1,14 @@
 <section class="blog">
     <div class="media" ng-repeat="article in articles | orderBy:'updatetime':true">
       <div class="media-left">
-        <a ng-href="#/blog/article{{article.updatetime}}">
+        <a ng-href="#/blog/{{article.id}}">
           <img class="media-object thumbnail" ng-src="{{article.thumbnail}}">
         </a>
       </div>
       <div class="media-body">
         {{article.tags}}
-        <h4 class="media-heading"><a ng-href="#/blog/article{{article.updatetime}}">{{article.title}}</a></h4>
-        {{article.updatetime | myDate }}
+        <h4 class="media-heading"><a ng-href="#/blog/{{article.id}}">{{article.title}}</a></h4>
+        {{article.updatetime | date:'yyyy年MM月dd日 HH:mm'}}
         <p>{{article.description}}</p>
       </div>
     </div>
@@ -17,8 +17,8 @@
 <section class="blog-detail">
     <div>
         <p>{{article.tags}}</p>
-        <h2>{{article.title}}</h2>
-        <p>{{article.updatetime | myDate }}</p>
-        <div ng-bind-html="article.body"></div>
+        <h1>{{article.title}}</h1>
+        <p>{{article.updatetime | date:'yyyy年MM月dd日 HH:mm'}}</p>
+        <div bind-html-compile="article.body"></div>
     </div>
 </section>

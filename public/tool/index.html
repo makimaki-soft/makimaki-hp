@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <title>まきまきソフト</title>
+        <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="/css/main-style.css">
+        <script src="//code.angularjs.org/1.6.1/angular.min.js"></script>
+        <link rel="icon" href="/img/favicon.ico">
+        <meta name=”robots” content=”noindex”>
+    </head>
+    <body data-ng-app="hpApp">
+
+        <!-- header -->
+        <ng-include src="'/template/header.html'"></ng-include>
+        <!-- /header -->
+
+        <section class="login">
+            <form data-ng-controller="loginController">
+            <table>
+                <tr><td>E-MAIL</td><td><input type="text" ng-model="email" /></td></tr>
+                <tr><td>PW</td><td><input type="password" ng-model="pw"></td></tr>
+            </table>
+            <input name="login" type="button" value="login" data-ng-click="login()">
+            </form>
+        </section>
+
+        <section class="blog-form">
+            <form data-ng-controller="blogFormController">
+            <table>
+                <tr><td>タイトル</td><td><input type="text" ng-model="title"></td></tr>
+                
+            </table>
+            </form>
+        </section>
+
+        <!-- footer -->
+        <ng-include src="'/template/footer.html'"></ng-include>
+        <!-- /footer -->
+
+        <script src="https://www.gstatic.com/firebasejs/3.6.5/firebase.js"></script>
+        <script>
+          // Initialize Firebase
+          var config = {
+            apiKey: "AIzaSyCG4q8L-XZIpRNajZZOZF-HrKbT6Nvc4c0",
+            authDomain: "makimaki-hp.firebaseapp.com",
+            databaseURL: "https://makimaki-hp.firebaseio.com",
+            storageBucket: "makimaki-hp.appspot.com",
+            messagingSenderId: "527975758642"
+          };
+          firebase.initializeApp(config);
+        </script>
+
+        <script type="text/javascript" src="/js/jquery-2.0.3.min.js"></script>
+        <script type="text/javascript" src="/js/app.js"></script>
+        <script type="text/javascript" src="/js/loginController.js"></script>
+        <script type="text/javascript" src="/js/blogFormController.js"></script>
+    </body>
+</html>

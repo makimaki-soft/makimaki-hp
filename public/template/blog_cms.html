@@ -1,0 +1,165 @@
+<section data-ng-controller="blogToolController">
+
+<div class="login">
+    <form ng-show="login_show_flag">
+
+    <div class="row">
+        <div class="col-sm-2">
+            <input class="form-control" type="text" ng-model="email" placeholder="e-mail" />
+        </div>
+        <div class="col-sm-2">
+            <input class="form-control" type="password" ng-model="pw" placeholder="password">
+        </div>
+        <div class="col-sm-2">
+            <input class="btn btn-primary" name="login" type="button" value="login" data-ng-click="login()">
+        </div>
+    </div>
+
+    </form>
+
+    <div class="row" ng-hide="login_show_flag">
+        <span class="text-primary">{{email}}</span><span>でログイン中</span>
+    </div>
+</div>
+
+
+<hr ng-hide="login_show_flag">
+
+<div ng-hide="login_show_flag">
+    <ul class="nav nav-pills">
+        <li role="presentation" class={{index_status}}><a href="javascript:void(0);" data-ng-click='changeMode("index")'>一覧</a></li>
+        <li role="presentation" class={{add_status}}><a href="javascript:void(0);" data-ng-click='changeMode("add")'>登録</a></li>
+    </ul>
+</div>
+
+<!-- 一覧 -->
+<div class="media" ng-repeat="article in articles | orderBy:'updatetime':true" ng-show="show_flag_index">
+    <div class="row">
+        <div class="col-sm-1">
+            {{$index + 1}}
+        </div>
+        <div class="col-sm-6">
+            {{article.title}}
+        </div>
+        <div class="col-sm-2">
+            <button class="btn btn-success" data-ng-click="goEditView(article.id)">編集</button>
+        </div>
+    </div>
+</div>
+
+<!-- 登録 -->
+<div class="blog-form" ng-show="show_flag_add">
+
+    <form name="myForm" ng-submit="add()" novalidate>
+
+    <div class="row">
+        <div class="col-sm-6">
+            タイトル <span class="text-danger" ng-show="myForm.title.$error.required">必須項目です。</span>
+            <input class="form-control" name="title" type="text" ng-model="title" size="70" required>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            タグ <span class="text-danger" ng-show="myForm.tags.$error.required">必須項目です。</span>
+            <input class="form-control" name="tags" type="text" ng-model="tags" size="70" placeholder="tag1,tag2" required>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            サムネイル <span class="text-danger" ng-show="myForm.thumbnail.$error.required">必須項目です。</span>
+            <input class="form-control" name="thumbnail" type="text" ng-model="thumbnail" size="70" placeholder="https://example.com/img/hoge.png" required>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            概要 <span class="text-danger" ng-show="myForm.description.$error.required">必須項目です。</span>
+            <textarea class="form-control" name="description" ng-model="description" rows="3" required></textarea>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            本文(Markdown)
+            <span class="text-danger" ng-show="myForm.body.$error.required">必須項目です。</span>
+            <textarea class="form-control" name="body" ng-model="md" rows="11" required></textarea>
+        </div>
+        <div class="col-sm-6">
+            Preview
+            <div class="md" btf-markdown="md" id="body"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-2">
+            <input class="btn btn-success" type="submit" value="投稿する" ng-disabled="myForm.$invalid">
+        </div>
+    </div>
+
+    </form>
+</div>
+
+<!-- 編集-->
+<div class="blog-form" ng-show="show_flag_edit">
+
+    <form name="myForm" ng-submit="edit()" novalidate>
+
+    <div class="row">
+        <div class="col-sm-6">
+            記事ID <span class="text-danger" ng-show="myForm.id.$error.required">必須項目です。</span>
+            <input class="form-control" name="id" type="text" ng-model="id" size="70" ng-readonly=true >
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            タイトル <span class="text-danger" ng-show="myForm.title.$error.required">必須項目です。</span>
+            <input class="form-control" name="title" type="text" ng-model="title" size="70" required >
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            タグ <span class="text-danger" ng-show="myForm.tags.$error.required">必須項目です。</span>
+            <input class="form-control" name="tags" type="text" ng-model="tags" size="70" placeholder="tag1,tag2" required>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            サムネイル <span class="text-danger" ng-show="myForm.thumbnail.$error.required">必須項目です。</span>
+            <input class="form-control" name="thumbnail" type="text" ng-model="thumbnail" size="70" placeholder="https://example.com/img/hoge.png" required>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            概要 <span class="text-danger" ng-show="myForm.description.$error.required">必須項目です。</span>
+            <textarea class="form-control" name="description" ng-model="description" rows="3" required></textarea>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            本文(Markdown)
+            <span class="text-danger" ng-show="myForm.body.$error.required">必須項目です。</span>
+            <textarea class="form-control" name="body" ng-model="md" rows="11" required></textarea>
+        </div>
+        <div class="col-sm-6">
+            Preview
+            <div class="md" btf-markdown="md" id="body"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-2">
+            <input class="btn btn-success" type="submit" value="更新する" ng-disabled="myForm.$invalid">
+        </div>
+    </div>
+
+    </form>
+</div>
+
+</section>

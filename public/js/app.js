@@ -1,10 +1,30 @@
 // ---------------------------------------------------------
 // 共通変数
 // ---------------------------------------------------------
-var articles = [];
+//var dbname = "/blog/"; // blogデータの参照先
+var dbname = "/blog/"; // blogデータの参照先
+var articles = []; // blog記事
 
+var preTohljs = function(str) {
+    var replacedStr = str.replace(/<pre><code>/g, "<div hljs>");
+    replacedStr = replacedStr.replace(/<\u002fcode><\u002fpre>/g, "<\u002fdiv>");
+    return replacedStr;
 
-var app = angular.module('hpApp',['ngSanitize', 'ngRoute'])
+    var replacedStr = "";
+    if(!reverse) {
+        replacedStr = str.replace(/<div hljs="">/g, "<pre><code>");
+        replacedStr = replacedStr.replace(/<\u002fdiv>/g, "<\u002fcode><\u002fpre>");
+    } else {
+        replacedStr = str.replace(/<pre><code>/g, "<div hljs>");
+        replacedStr = replacedStr.replace(/<\u002fcode><\u002fpre>/g, "<\u002fdiv>");
+    }
+    return replacedStr;
+}
+
+// ---------------------------------------------------------
+// ルーティング
+// ---------------------------------------------------------
+var app = angular.module('hpApp',['ngSanitize', 'ngRoute', 'btford.markdown', 'hljs'])
     .config(['$routeProvider', function($routeProvider){
         $routeProvider
         .when('/', {
@@ -20,6 +40,9 @@ var app = angular.module('hpApp',['ngSanitize', 'ngRoute'])
             templateUrl: 'template/blog.html',
             controller: 'blogController'
         })
+        .when('/tool/blog_cms/', {
+            templateUrl: 'template/blog_cms.html',
+        })
         .otherwise({
             redirectTo: '/'
         });
@@ -30,21 +53,36 @@ var app = angular.module('hpApp',['ngSanitize', 'ngRoute'])
 
 
 // ---------------------------------------------------------
-// カスタムフィルター
+// config
 // ---------------------------------------------------------
-// YYYYMMDD文字列用
-app.filter('myDate', function() {
-    return function(input) {
-        if(!input) {
-            return;
-        }
-        console.log(input);
-        return input.substr(0, 4) + "年"
-             + input.substr(4, 2) + "月"
-             + input.substr(6, 2) + "日";
-    }
+app.config(function (hljsServiceProvider) {
+  hljsServiceProvider.setOptions({
+    // replace tab with 4 spaces
+    //tabReplace: '    '
+  });
 });
 
+app.directive('bindHtmlCompile', ['$compile', function ($compile) {
+  return {
+    restrict: 'A',
+    link: function (scope, element, attrs) {
+      scope.$watch(function () {
+        return scope.$eval(attrs.bindHtmlCompile);
+      }, function (value) {
+        // Incase value is a TrustedValueHolderType, sometimes it
+        // needs to be explicitly called into a string in order to
+        // get the HTML string.
+        element.html(value && value.toString());
+        // If scope is provided use it, otherwise use parent scope
+        var compileScope = scope;
+        if (attrs.bindHtmlScope) {
+          compileScope = scope.$eval(attrs.bindHtmlScope);
+        }
+        $compile(element.contents())(compileScope);
+      });
+    }
+  };
+}]);
 
 // ---------------------------------------------------------
 // 右上のメニューの表示
@@ -65,20 +103,11 @@ app.controller('blogController', ['$scope', '$routeParams', function($scope, $ro
 
     $scope.id = $routeParams.id;
     if($scope.id){ // ----- 詳細ページ
-        if(articles == []) { // ----- 記事取得済ならデータとりにいかない。
-            console.log(articles);
-            var article = articles[$scope.id];
-            $scope.article = article;
-            $scope.$apply();
+        firebase.database().ref(dbname + $scope.id).once('value').then(function(snapshot) {
+            article = snapshot.val();
 
-            // view にセット
-            document.querySelector("section.blog-detail").style.display = "block";
-            hljs.initHighlightingOnLoad();
-            return;
-        }
-        firebase.database().ref('/blog/').limitToLast(10).once('value').then(function(snapshot) {
-            articles = snapshot.val();
-            var article = articles[$scope.id];
+            // body内のコードがハイライトするように
+            article.body = preTohljs(article.body);
             console.log(article);
 
             $scope.article = article;
@@ -86,7 +115,6 @@ app.controller('blogController', ['$scope', '$routeParams', function($scope, $ro
 
             // view にセット
             document.querySelector("section.blog-detail").style.display = "block";
-            hljs.initHighlightingOnLoad();
         });
     }else { // ----- indexページ(パラメータ無し)
         if(articles == []) { // ----- 記事取得済ならデータとりにいかない。
@@ -102,7 +130,7 @@ app.controller('blogController', ['$scope', '$routeParams', function($scope, $ro
             document.querySelector("section.blog").style.display = "block";
             return;
         }
-        firebase.database().ref('/blog/').limitToLast(10).once('value').then(function(snapshot) {
+        firebase.database().ref(dbname).limitToLast(10).once('value').then(function(snapshot) {
             articles = snapshot.val();
             // 配列に変換
             ary_articles = $.map(articles, function(value, index) {
