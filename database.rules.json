@@ -3,6 +3,10 @@
     "blog" : {
    		".read": true,
     	".write": "auth != null"
+    },
+    "test" : {
+   		".read": true,
+    	".write": "auth != null"
     }
   }
 }
