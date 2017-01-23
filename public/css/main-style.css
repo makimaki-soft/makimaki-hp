@@ -148,14 +148,17 @@ section.blog .thumbnail {
 
 section.blog-detail {
     display: none;
+    margin-right: 200px;
+    margin-left: 200px;
+    font-size: 16px;
 }
 
-section.blog-detail h2 {
+section.blog-detail h1 {
     border-bottom: 1px solid;
     border-bottom-color: #999;
 }
 
-section.blog-detail h3 {
+section.blog-detail h2, div.md h2 {
     border-bottom: 0px;
     font-weight: bold;
 }

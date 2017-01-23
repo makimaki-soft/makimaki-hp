@@ -116,7 +116,7 @@ app.controller('blogToolController', ['$scope', function($scope) {
         };
         console.log(postData);
 
-        this.regist(newPostKey, postData);
+        regist(newPostKey, postData);
     }
 
     $scope.goEditView = function(id) {
@@ -168,5 +168,17 @@ app.controller('blogToolController', ['$scope', function($scope) {
         function(error){
             console.log("error:" + error);
         });
+    }
+
+    var preTohljs = function(str, reverse) {
+        var replacedStr = "";
+        if(!reverse) {
+            replacedStr = str.replace(/<div hljs="">/g, "<pre><code>");
+            replacedStr = replacedStr.replace(/<\u002fdiv>/g, "<\u002fcode><\u002fpre>");
+        } else {
+            replacedStr = str.replace(/<pre><code>/g, "<div hljs>");
+            replacedStr = replacedStr.replace(/<\u002fcode><\u002fpre>/g, "<\u002fdiv>");
+        }
+        return replacedStr;
     }
 }]);
