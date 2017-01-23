@@ -12,6 +12,12 @@ app.controller('blogToolController', ['$scope', function($scope) {
     $scope.index_status = "active";
     $scope.add_status = "nonactive";
 
+    // noindexのメタタグを付与
+    var meta = document.createElement('meta');
+    meta.setAttribute('name', 'robots');
+    meta.setAttribute('content', 'noindex');
+    document.getElementsByTagName('head')[0].appendChild(meta);
+
     // ログイン
     $scope.login = function() {
         console.log($scope.email);
